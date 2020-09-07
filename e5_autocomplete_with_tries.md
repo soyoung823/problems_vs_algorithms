@@ -1,14 +1,16 @@
 TrieNode:
+when n is the number of nodes in the Trie.
+
 Time complexity: 
     insert: O(1) since the procedure uses a constant time dictionary insertion.
-
-space complexity:
-    O(n) since n length of nodes are growing 
+    
+    suffixes: O(n) since we visit every node once each at worst case. 
 
 Trie:
 Time complexity:
-    insert: O(n) since the procedure uses a for loop and visit n nodes.
-    find: O(m) if the length of search string is m since each word look up needs O(1) in dictionary.
+    insert: O(m) when m is the length of word.
+
+    find: O(m) when m is the length of prefix.
 
 space complexity:
-    O(n) since n length of nodes are growing 
+    O(n) when n is the number of nodes in Trie. 
