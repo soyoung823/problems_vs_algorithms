@@ -1,3 +1,7 @@
+1. Problem explanations
+The goal is to build a Trie with Trie class and TrieNode class.
+
+2. Complexity explanations
 TrieNode:
 when n is the number of nodes in the Trie.
 
