@@ -32,7 +32,7 @@ def rearrange_digits(input_list):
         pivot = arr[high] # last element
 
         for j in range(low, high):
-            if arr[j] < pivot:
+            if arr[j] > pivot:
                 i += 1
                 arr[i], arr[j] = arr[j], arr[i]
         arr[i + 1], arr[high] = arr[high], arr[i + 1]
@@ -44,6 +44,8 @@ def rearrange_digits(input_list):
 
             quickSort(arr, low, partitioning_i - 1)
             quickSort(arr, partitioning_i + 1, high)
+
+    quickSort(input_list, 0, len(input_list) - 1)
 
     n1 = ''
     n2 = ''
@@ -60,9 +62,9 @@ def test_function(test_case):
     output = rearrange_digits(test_case[0])
     solution = test_case[1]
     if sum(output) == sum(solution):
-        print("Pass: ", solution)
+        print("Pass: ", output)
     else:
-        print("Fail ", solution)
+        print("Fail ", output)
 
 test_function([[1, 2, 3, 4, 5], [542, 31]])
 test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
