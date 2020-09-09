@@ -1,6 +1,7 @@
 '''
 Rearrange Array Elements
-Rearrange Array Elements so as to form two number such that their sum is maximum. Return these two numbers. You can assume that all array elements are in the range [0, 9]. The number of digits in both the numbers cannot differ by more than 1. You're not allowed to use any sorting function that Python provides and the expected time complexity is O(nlog(n)).
+Rearrange Array Elements so as to form two number such that their sum is maximum. 
+Return these two numbers. You can assume that all array elements are in the range [0, 9]. The number of digits in both the numbers cannot differ by more than 1. You're not allowed to use any sorting function that Python provides and the expected time complexity is O(nlog(n)).
 
 for e.g. [1, 2, 3, 4, 5]
 
@@ -11,6 +12,49 @@ In scenarios such as these when there are more than one possible answers, return
 Here is some boilerplate code and test cases to start with:
 '''
 
+def rearrange_digits(input_list):
+    """
+    Rearrange Array Elements so as to form two number such that their sum is maximum.
+
+    Args:
+       input_list(list): Input List
+    Returns:
+       (int),(int): Two maximum sums
+    """
+    if input_list is None or len(input_list) < 2:
+        return [-1]
+
+    # sort the input in descending order
+    # input_list.sort(reverse=True)
+    # quicksort. last element = pivot
+    def partition(arr, low, high):
+        i = low - 1
+        pivot = arr[high] # last element
+
+        for j in range(low, high):
+            if arr[j] < pivot:
+                i += 1
+                arr[i], arr[j] = arr[j], arr[i]
+        arr[i + 1], arr[high] = arr[high], arr[i + 1]
+        return i + 1
+
+    def quickSort(arr, low, high):
+        if low < high:
+            partitioning_i = partition(arr, low, high)
+
+            quickSort(arr, low, partitioning_i - 1)
+            quickSort(arr, partitioning_i + 1, high)
+
+    n1 = ''
+    n2 = ''
+
+    for i in range(len(input_list)):
+        if i % 2 == 0:
+            n1 += str(input_list[i])
+        else:
+            n2 += str(input_list[i])
+    return [int(n1), int(n2)]
+'''
 # merge sort the array
 def merge_sort(arr):
     if len(arr) <= 1:
@@ -65,6 +109,7 @@ def rearrange_digits(input_list):
         else:
             n2 += str(sorted_list[i])
     return [int(n1), int(n2)]
+'''
 
 def test_function(test_case):
     output = rearrange_digits(test_case[0])
