@@ -54,6 +54,24 @@ def rearrange_digits(input_list):
         else:
             n2 += str(input_list[i])
     return [int(n1), int(n2)]
+
+
+def test_function(test_case):
+    output = rearrange_digits(test_case[0])
+    solution = test_case[1]
+    if sum(output) == sum(solution):
+        print("Pass: ", solution)
+    else:
+        print("Fail ", solution)
+
+test_function([[1, 2, 3, 4, 5], [542, 31]])
+test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
+test_function([None, [-1]])
+test_function([[], [-1]])
+test_function([[0], [-1]])
+test_function([[0, 0], [0, 0]])
+test_function([[9, 7, 8], [98, 7]])
+
 '''
 # merge sort the array
 def merge_sort(arr):
@@ -110,19 +128,3 @@ def rearrange_digits(input_list):
             n2 += str(sorted_list[i])
     return [int(n1), int(n2)]
 '''
-
-def test_function(test_case):
-    output = rearrange_digits(test_case[0])
-    solution = test_case[1]
-    if sum(output) == sum(solution):
-        print("Pass")
-    else:
-        print("Fail")
-
-test_function([[1, 2, 3, 4, 5], [542, 31]])
-test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
-test_function([None, [-1]])
-test_function([[], [-1]])
-test_function([[0], [-1]])
-test_function([[0, 0], [0, 0]])
-test_function([[9, 7, 8], [98, 7]])
