@@ -88,4 +88,7 @@ test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
 test_function([[6, 7, 8, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
-
+test_function([[6, 7, 8, 1, 2, 3, 4], 0])
+test_function([[], 10])
+test_function([[], 0])
+test_function([[], None])
