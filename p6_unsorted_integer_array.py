@@ -33,7 +33,10 @@ import random
 l = [i for i in range(0, 10)]  # a list containing 0 - 9
 random.shuffle(l)
 print ("Pass" if ((0, 9) == get_min_max(l)) else "Fail")
-
+print ("Pass" if ((2, 10) == get_min_max([2, 4, 6, 8, 10])) else "Fail")
+print ("Pass" if ((0, 0) == get_min_max([0, 0, 0, 0])) else "Fail")
+print(get_min_max([]))
+print ("Pass" if (None == get_min_max([])) else "Fail")
 '''
 Sorting usually requires O(n log n) time Can you come up with a O(n) algorithm (i.e., linear time)?
 '''

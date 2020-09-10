@@ -63,7 +63,7 @@ class Router:
         # bonus points if a path works with and without a trailing slash
         # e.g. /about and /about/ both return the /about handler
         path_list = self.split_path(path)
-        found = self.routeTrie.find(path)
+        found = self.routeTrie.find(path_list)
         if found is None:
             return self.not_found_hanlder
         return found
@@ -72,7 +72,11 @@ class Router:
         # you need to split the path into parts for 
         # both the add_handler and loopup functions,
         # so it should be placed in a function here
-        return path.split('/')
+        path = path.strip('/')
+        #return path.split('/') if path else []
+        if path:
+            return path.split('/')
+        return []
 
 
 # Test Cases
@@ -83,7 +87,7 @@ router = Router("root handler", "not found handler", ) # remove the 'not found h
 router.add_handler("/home/about", "about handler")  # add a route
 
 # some lookups with the expected output
-print(router.lookup(""))
+print(router.lookup("")) # should print 'root handler'
 print(router.lookup("/")) # should print 'root handler'
 print(router.lookup("/home")) # should print 'not found handler' or None if you did not implement one
 print(router.lookup("/home/about")) # should print 'about handler'

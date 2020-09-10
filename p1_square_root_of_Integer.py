@@ -30,21 +30,39 @@ def sqrt(number):
        number(int): Number to find the floored squared root
     Returns:
        int: Floored Square Root
-    """
-    # edge case
+
+    # O(n)
     if number <= 1:
         return number
-
-    # from 1, try all natural numbers until i * i >= number
     i = 1
     result = 1
     while result <= number:
         i += 1
         result = i * i
     return i - 1
+    """
+    # edge case
+    if number <= 1:
+        return number
 
-print ("Pass" if  (3 == sqrt(9)) else "Fail")
+    low = 1
+    high = number
+    while low <= high:
+        mid = (low + high) // 2
+        
+        if mid * mid == number:
+            return mid
+        if mid * mid < number:
+            low = mid + 1
+            ans = mid
+        else:
+            high = mid - 1
+
+    return ans
+
+ 
+print ("Pass" if  (-1 == sqrt(-1)) else "Fail")
 print ("Pass" if  (0 == sqrt(0)) else "Fail")
-print ("Pass" if  (4 == sqrt(16)) else "Fail")
 print ("Pass" if  (1 == sqrt(1)) else "Fail")
-print ("Pass" if  (5 == sqrt(27)) else "Fail")
+print ("Pass" if  (4 == sqrt(16)) else "Fail")
+print ("Pass" if  (1000 == sqrt(1000000)) else "Fail")
