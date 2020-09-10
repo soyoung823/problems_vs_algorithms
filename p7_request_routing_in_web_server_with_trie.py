@@ -1,9 +1,11 @@
+from collections import defaultdict
+
 # A RouteTrieNode will be similar to our autocomplete TrieNode... with one additional element, a handler.
 class TrieNode:
-    def __init__(self):
+    def __init__(self, handler=None):
         # Initialize the node with children as before, plus a handler
-        self.children = {}
-        self.handler = None
+        self.children = defaultdict(TrieNode)
+        self.handler = handler
 
     def insert(self, path_part):
         # Insert the node as before
@@ -14,19 +16,16 @@ class TrieNode:
 class Trie:
     def __init__(self, handler):
         # Initialize the trie with an root node and a handler, this is the root path or home page node
-        self.root = TrieNode()
-        self.handler = handler
+        self.root = TrieNode(handler)
 
     def insert(self, path, handler):
         # Similar to our previous example you will want to recursively add nodes
         # Make sure you assign the handler to only the leaf (deepest) node of this path
         node = self.root
-        
         for path_part in path:
             # if path_part not in node.children:
             node.insert(path_part)
-            node = node.children[path_part]
-           
+            node = node.children[path_part]   
         node.handler = handler
 
     def find(self, path):
@@ -34,12 +33,10 @@ class Trie:
         # Find the trie node that represents this path
         # Return the handler for a match, or None for no match
         node = self.root
-
         for path_part in path:
             if path_part not in node.children:
                 return None
             node = node.children[path_part]
-
         return node.handler
 
 
@@ -49,7 +46,6 @@ class Router:
         # Create a new RouteTrie for holding our routes
         # You could also add a handler for 404 page not found responses as well!
         self.root = Trie(handler)
-        self.handler = handler
         self.not_found_hanlder = not_found_handler
 
     def add_handler(self, path, handler):
@@ -66,12 +62,10 @@ class Router:
         # return the "not found" handler if you added one
         # bonus points if a path works with and without a trailing slash
         # e.g. /about and /about/ both return the /about handler
-
-        path_list = self.split_path(path)
-
         if len(path) == 0:
             return self.root.handler
-        
+
+        path_list = self.split_path(path)
         found = self.root.find(path)
 
         if found is None:
