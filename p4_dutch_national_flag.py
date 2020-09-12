@@ -18,25 +18,33 @@ def sort_012(input_list):
        input_list(list): List to be sorted
     """
     # one pass + in-place
-    # set all pointers start, cur, end for 0, 1, 2
-    start = 0
-    cur = 0
-    end = len(input_list) - 1
+    # set all pointers start, mid, end for 0, 1, 2
+    start_i = 0
+    current_i = 0
+    end_i = len(input_list) - 1
 
-    # until cur index <= end index
-    while cur <= end:
-        # case 1: cur element is 0
-        if input_list[cur] == 0:
-            input_list[cur], input_list[start] = input_list[start], input_list[cur]
-            start += 1
-            cur += 1
-        # case 2: cur element is 1
-        elif input_list[cur] == 1:
-            cur += 1
-        # case 3: cur element is 2
-        elif input_list[cur] == 2:
-            input_list[cur], input_list[end] = input_list[end], input_list[cur]
-            end -= 1
+    # until current index <= end index
+    while current_i <= end_i:
+
+        # case 1: current_i element is 0
+        if input_list[current_i] == 0:
+            temp = input_list[start_i]
+            input_list[start_i] = input_list[current_i]
+            input_list[current_i] = temp
+            start_i += 1
+            current_i += 1
+
+        # case 2: current_i element is 1
+        elif input_list[current_i] == 1:
+            current_i += 1
+
+        # case 3: current_i element is 2
+        elif input_list[current_i] == 2:
+            temp = input_list[end_i]
+            input_list[end_i] = input_list[current_i]
+            input_list[current_i] = temp
+            end_i -= 1
+
     return input_list
 
 
